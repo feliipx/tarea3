@@ -11,7 +11,9 @@ public class UserManager {
     }
 
     public boolean addUser(User user) {
-
+        if (user.getId().isEmpty()) {
+            return false;
+        }
         if (getUserById(user.getId()) != null) {
             System.out.println("Error: El usuario con ID '" + user.getId() + "' ya está registrado.");
             return false;

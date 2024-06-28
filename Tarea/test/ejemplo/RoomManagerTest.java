@@ -32,6 +32,12 @@ public class RoomManagerTest {
     }
 
     @Test
+    public void testAddEmptyRoom() {
+        Room room = new Room("", "", "");
+        assertTrue(roomManager.addRoom(room));
+    }
+
+    @Test
     public void testGetRoomByCode() {
         Room room = roomManager.getRoomByCode("101");
         assertNotNull(room);

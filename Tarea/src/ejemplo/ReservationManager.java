@@ -19,26 +19,6 @@ public class ReservationManager {
         return reservations;
     }
 
-    public List<Reservation> getReservationsByUser(User user) {
-        List<Reservation> userReservations = new ArrayList<>();
-        for (Reservation reservation : reservations) {
-            if (reservation.getUser().equals(user)) {
-                userReservations.add(reservation);
-            }
-        }
-        return userReservations;
-    }
-
-    public List<Reservation> getReservationsByRoom(Room room) {
-        List<Reservation> roomReservations = new ArrayList<>();
-        for (Reservation reservation : reservations) {
-            if (reservation.getRoom().equals(room)) {
-                roomReservations.add(reservation);
-            }
-        }
-        return roomReservations;
-    }
-
     public boolean updateReservation(Reservation reservation) {
         for (int i = 0; i < reservations.size(); i++) {
             if (reservations.get(i).getRoom().equals(reservation.getRoom()) &&

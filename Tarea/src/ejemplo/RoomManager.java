@@ -3,6 +3,8 @@ package ejemplo;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ejemplo.Main.maxRooms;
+
 public class RoomManager {
     private List<Room> rooms;
 
@@ -12,7 +14,10 @@ public class RoomManager {
 
     public boolean addRoom(Room room) {
         if (getRoomByCode(room.getCode()) != null) {
-            System.out.println("Error: El usuario con ID '" + room.getCode() + "' ya está registrado.");
+            System.out.println("Error: La sala con ID '" + room.getCode() + "' ya está registrado.");
+            return false;
+        }
+        if (room.getCode().isEmpty() || rooms.size() >= maxRooms) {
             return false;
         }
 

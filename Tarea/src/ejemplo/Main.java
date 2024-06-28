@@ -13,7 +13,7 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    private static int maxRooms = 10; // Límite por defecto de salas
+    public static int maxRooms = 10; // Límite por defecto de salas
 
     public static void main(String[] args) {
         System.out.print("Ingrese el límite máximo de salas: ");
@@ -152,6 +152,10 @@ public class Main {
         System.out.println("Agregar nueva sala:");
         System.out.print("Código: ");
         String code = scanner.nextLine();
+        if (code.isEmpty()) {
+            System.out.println("El código no puede estar vacío.");
+            return false;
+        }
         if (roomManager.getRoomByCode(code) != null) {
             System.out.println("Ya existe una sala con ese código.");
             return false;
@@ -205,6 +209,10 @@ public class Main {
         System.out.println("Agregar nuevo usuario:");
         System.out.print("ID: ");
         String id = scanner.nextLine();
+        if (id.isEmpty()) {
+            System.out.println("El ID no puede estar vacío.");
+            return;
+        }
         if (userManager.getUserById(id) != null) {
             System.out.println("Ya existe un usuario con ese ID.");
             return;
@@ -258,7 +266,7 @@ public class Main {
         System.out.println("Usuario eliminado con éxito.");
     }
 
-    private static void addReservation() {
+    private static void addReservationn() {
         System.out.println("Crear nueva reserva:");
         System.out.print("Código de la sala: ");
         String roomCode = scanner.nextLine();
@@ -288,6 +296,40 @@ public class Main {
         Reservation reservation = new Reservation(room, user, date, detail);
         reservationManager.addReservation(reservation);
         System.out.println("Reserva creada con éxito.");
+    }
+    private static void addReservation() {
+        System.out.println("Crear nueva reserva:");
+        System.out.print("Código de la sala: ");
+        String roomCode = scanner.nextLine();
+        Room room = roomManager.getRoomByCode(roomCode);
+        if (room == null) {
+            System.out.println("Sala no encontrada.");
+            return;
+        }
+        System.out.print("ID del usuario: ");
+        String userId = scanner.nextLine();
+        User user = userManager.getUserById(userId);
+        if (user == null) {
+            System.out.println("Usuario no encontrado.");
+            return;
+        }
+        System.out.print("Fecha (dd/MM/yyyy): ");
+        String dateStr = scanner.nextLine();
+        Date date;
+        try {
+            date = dateFormat.parse(dateStr);
+        } catch (ParseException e) {
+            System.out.println("Formato de fecha inválido.");
+            return;
+        }
+        System.out.print("Detalle de la reserva: ");
+        String detail = scanner.nextLine();
+        Reservation reservation = new Reservation(room, user, date, detail);
+        if (reservationManager.addReservation(reservation)) {
+            System.out.println("Reserva creada con éxito.");
+        } else {
+            System.out.println("La sala ya está reservada para esta fecha.");
+        }
     }
 
     private static void viewReservations() {
