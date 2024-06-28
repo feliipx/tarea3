@@ -52,9 +52,4 @@ El programa completo se desarrolló en Java, utilizando IntelliJ para aprovechar
 
 
 
-Falta revisar: 
-
-arreglar que no se pueda reservar la sala en la misma fecha, pero que se pueda reservar en otro dia
-
-
 
